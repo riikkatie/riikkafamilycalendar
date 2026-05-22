@@ -2,9 +2,9 @@ import { FamilyEvent } from "@/types";
 
 export async function fetchGoogleEvents(calendarId: string): Promise<FamilyEvent[]> {
   const clientId = process.env.GOOGLE_CLIENT_ID;
-  const accessToken = process.env.GOOGLE_REFRESH_TOKEN;
+  const refreshToken = process.env.GOOGLE_REFRESH_TOKEN;
 
-  if (!clientId || !accessToken || !calendarId) {
+  if (!clientId || !refreshToken || !calendarId) {
     return [];
   }
 
@@ -15,7 +15,7 @@ export async function fetchGoogleEvents(calendarId: string): Promise<FamilyEvent
   url.searchParams.set("timeMin", new Date().toISOString());
 
   const response = await fetch(url, {
-    headers: { Authorization: `Bearer ${accessToken}` },
+    headers: { Authorization: `Bearer ${refreshToken}` },
     cache: "no-store",
   });
 
