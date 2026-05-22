@@ -8,7 +8,7 @@ A shared family calendar PWA built with Next.js 14. It merges three color-coded 
 
 ## Features
 
-- Dashboard: "What\'s happening today"
+- Dashboard: "What's happening today"
 - Day, week, and month views
 - Merged color-coded events
 - Simple shared password/PIN login
@@ -24,8 +24,8 @@ A shared family calendar PWA built with Next.js 14. It merges three color-coded 
 - Next.js 14 (App Router)
 - TypeScript + Tailwind CSS
 - PostgreSQL + Prisma
-- Google Calendar API (`googleapis`)
-- Microsoft Graph (`@microsoft/microsoft-graph-client`)
+- Google Calendar API (REST)
+- Microsoft Graph API (REST)
 - iCal parsing (`node-ical`)
 
 ## Setup
