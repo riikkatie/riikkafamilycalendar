@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Calendar {
+  id         String   @id @default(cuid())
+  ownerName  String
+  color      String
+  syncType   String
+  syncSource String?
+  events     Event[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Event {
+  id          String    @id @default(cuid())
+  calendarId  String
+  calendar    Calendar  @relation(fields: [calendarId], references: [id])
+  title       String
+  description String?
+  start       DateTime
+  end         DateTime
+  allDay      Boolean   @default(false)
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
+  isPrivate   Boolean   @default(false)
+  externalId  String?
+  location    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([calendarId, externalId])
+}
+
+model Category {
+  id     String  @id @default(cuid())
+  name   String  @unique
+  icon   String?
+  color  String?
+  events Event[]
+}
+
+model Settings {
+  id               String  @id @default(cuid())
+  conflictsEnabled Boolean @default(false)
+  appPassword      String
+}
